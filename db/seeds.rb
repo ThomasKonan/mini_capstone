@@ -13,3 +13,11 @@ product.save
 
 product = Product.new(name: "Red Wing Iron Ranger Boots", price: 329, image_url: "https://embed.widencdn.net/img/redwing/fcwacxemrq/600x600px/RW08085C_MUL_N1_0416?position=S&crop=no&color=EDE8DD", description: "The Iron Ranger is an American icon that is beloved for its standout style and long-lasting construction. With its toe cap, speed hooks, and Vibram® outsole, there's no mistaking this leather legend.")
 product.save
+
+products_without_supplier = Product.where(supplier_id: nil_)
+
+products_without_supplier.each do |product|
+  random_supplier_id = Supplier.all.sample.id
+  product.supplier_id = random_supplier_id
+  product.save!
+end

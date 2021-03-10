@@ -1,18 +1,40 @@
 class Api::ProductsController < ApplicationController
   def index
-    @products = Product.all
+    products = Product.all
     render "index.json.jb"
+    # if params[:discount] == "true"
+    #   @products = Product.where("price < 10")
+    # elsif params[:sort] && params[:sort_order]
+    #   @products = Product.order({ params[:sort] => params[:sort_order] })
+    #   # elsif params[:sort] == "price" && params[:sort_order == "desc"
+    #   #   @products= Product.order({price: :desc})
+    #   # elsif params[:sort] == "price" && params[: sort_order] = "asc"
+    #   #   @products= Product.order({price: :asc})
+    #   # else
+    #   #   @products = Product.all
+    #   # end
+    #   #   @products = Product.all
+    #   # render "index.json.jb"
+
+    #   highest to lowest price
+    #   @products = Product.order({ price: :desc })
+
+    #   lowest to highest
+    #   @products = Product.order({ price: :asc })
+
+    #   discounted
+    #   @products = Product.where ("price < 10")
+    # end
   end
 
   def create
-    @product = Product.new(
+    @products = Product.new(
       name: params[:name],
       price: params[:price],
       image_url: params[:image_url],
       description: params[:description],
+      is_discounted: params[:is_discounted],
     )
-    @product.save
-    render "show.json.jb"
   end
 
   def show
@@ -31,6 +53,7 @@ class Api::ProductsController < ApplicationController
     @product.description = params[:description]
     @product.image_url = params[:image_url]
     @product.name = params[:name]
+    @product.is_discounted = params[:is_discounted]
     # applying those changes to the db
     @product.save
   end
@@ -38,7 +61,7 @@ class Api::ProductsController < ApplicationController
   def destroy
     # figure out what product to delete
     @product = Product.find_by(id: params[:id])
-    render json: { message: "product has been removed" }
     @product.destroy
+    render json: { message: "product has been removed" }
   end
 end
