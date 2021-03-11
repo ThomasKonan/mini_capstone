@@ -1,6 +1,6 @@
 class Api::ProductsController < ApplicationController
   def index
-    products = Product.all
+    @products = Product.all
     render "index.json.jb"
     # if params[:discount] == "true"
     #   @products = Product.where("price < 10")
@@ -33,13 +33,12 @@ class Api::ProductsController < ApplicationController
       price: params[:price],
       image_url: params[:image_url],
       description: params[:description],
-      is_discounted: params[:is_discounted],
+      # is_discounted: params[:is_discounted],
     )
   end
 
   def show
     # get the data from the db
-    the_id = params[:id]
     @product = Product.find_by(id: the_id)
     #  show that data to the user
     render "show.json.jb"
@@ -53,7 +52,7 @@ class Api::ProductsController < ApplicationController
     @product.description = params[:description]
     @product.image_url = params[:image_url]
     @product.name = params[:name]
-    @product.is_discounted = params[:is_discounted]
+    # @product.is_discounted = params[:is_discounted]
     # applying those changes to the db
     @product.save
   end
