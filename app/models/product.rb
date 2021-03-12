@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
   # self.abstract_class = true
+  has_many: 
+  has_many: 
 end
 
 # validates :name, presence: true
