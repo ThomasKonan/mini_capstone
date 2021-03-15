@@ -16,8 +16,9 @@ Rails.application.routes.draw do
     get "/orders/:id" => "orders#show"
     post "/orders" => "orders#create"
 
-
     post "/users" => "users#create"
     post "/sessions" => "sessions#create"
+
+    post "/carted_products" => "carted_products#create"
   end
 end

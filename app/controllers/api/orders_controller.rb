@@ -25,6 +25,7 @@ class Api::OrdersController < ApplicationController
     total: 
   )
 
-  @ordeer.save!render 'show.json.jb'
+  @order.save!
+  render 'show.json.jb'
   end
 end

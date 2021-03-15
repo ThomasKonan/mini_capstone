@@ -25,6 +25,9 @@ class Api::ProductsController < ApplicationController
     #   discounted
     #   @products = Product.where ("price < 10")
     # end
+
+    # if params[:category]
+
   end
 
   def create

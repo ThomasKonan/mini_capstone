@@ -1,7 +1,8 @@
 class Product < ApplicationRecord
-  # self.abstract_class = true
-  has_many: 
-  has_many: 
+  has_many :category_products
+  has_many :categories, through :category_productsimages
+  belongs_to :orders
+  belongs_to :carted_products
 end
 
 # validates :name, presence: true
