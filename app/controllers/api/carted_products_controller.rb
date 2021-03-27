@@ -1,7 +1,7 @@
 class Api::CartedProductsController < ApplicationController
   def index
-    @carted_products = CartedProduct.where(user_id: current_user.id)
-    @carted_products = @carted_products.where(status: "carted")
+    # @carted_products = CartedProduct.where(user_id: current_user.id)
+    @carted_products = current_user.carted_products.where(status: "carted")
     render "index.json.jb"
   end
 
@@ -14,11 +14,11 @@ class Api::CartedProductsController < ApplicationController
     )
     @carted_product.save
     render "show.json.jb"
-    # render json: { message: "product has been added to cart" }
   end
 
   def destroy
-    @carted_product = Product.find_by(id: params[:id])
+    @carted_product = CartedProduct.find_by(id: params[:id])
+    @carted_product.update(status: "removed")
     render json: { message: "Item removed from cart" }
   end
 end
